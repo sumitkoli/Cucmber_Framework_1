@@ -17,7 +17,7 @@ glue= {"Step_Definition"},
 monochrome=true,
 
 //Tags to run specific test
-tags="@Sanity",
+//tags="@Sanity",
 
 //To run the test cases 
 dryRun= false,

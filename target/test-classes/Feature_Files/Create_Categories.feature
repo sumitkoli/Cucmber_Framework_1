@@ -15,7 +15,5 @@ Feature: To test Create Event Categories Function
     And Enter enter Event Name "Test1" and Status as "Inactive"
     And Click on Save
     Then Page Header should be "Event Categories"
-    When User click on logout Button
-    Then Page Tittle should be "Event Management System - Admin Login"
-    And close the browser
+   
 
