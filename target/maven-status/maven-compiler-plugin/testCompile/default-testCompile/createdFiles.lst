@@ -1,0 +1,7 @@
+Page_Objects\Event_Category_Page.class
+Page_Objects\Login_Page.class
+Base_Class\Test_Runner.class
+Step_Definition\Login_Test_Steps.class
+Page_Objects\Home_Page.class
+Page_Objects\Create_Event_Category_Page.class
+Base_Class\Base_Class.class

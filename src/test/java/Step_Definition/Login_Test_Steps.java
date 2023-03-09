@@ -1,6 +1,6 @@
 package Step_Definition;
 
-
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -14,86 +14,97 @@ import Page_Objects.Login_Page;
 import io.cucumber.java.en.*;
 import junit.framework.Assert;
 
-
 public class Login_Test_Steps extends Base_Class {
-	
-	
+
 	@Given("the browser is open")
-	public void the_browser_is_open() {
+	public void the_browser_is_open() throws IOException {
 		setup();
-		
+
 	}
 
 	@When("User opens the URL {string}")
 	public void user_opens_the_url(String url) {
-	    driver.get(url);
+		driver.get(url);
 	}
 
 	@And("User enters Email as {string} and Password as {string}")
 	public void user_enters_email_as_and_password_as(String emailadd, String password) {
 		loginPg.enterEmail(emailadd);
+		log.info("UserName is Entered");
 		loginPg.enterPass(password);
-	 
+		log.info("Password is Entered");
+
 	}
 
 	@And("Click on Sign In")
 	public void click_on_sign_in() {
-	    loginPg.clickonSigninButton();
-	}
-
-	@Then("Page Tittle should be {string}")
-	public void page_tittle_should_be(String expectedtitle) {
-	   String actualtitle= driver.getTitle();
-	   
-	   Assert.assertEquals(expectedtitle, actualtitle);
-	}
-
-	@When("User click on logout Button")
-	public void user_click_on_logout_button() throws InterruptedException {
-		homePg.clickonProfile();
-	    homePg.clickonLogoutBtn();
+		loginPg.clickonSigninButton();
+		log.info("Sign In Button is clicked");
 	}
 
 	@Then("close the browser")
 	public void close_the_browser() {
-	   teardown();
+		teardown();
 	}
 
-	
-	@And("Click on Event Category Tab")
-	public void click_on_event_category_tab() throws InterruptedException {
-		homePg.clickonEventCategoryTab();
-	   
+	@Then("Validations message is displayed for valid username and invalid password")
+	public void validations_message_is_displayed_for_valid_username_and_invalid_password() {
+
+		String actual = loginPg.get_validationText();
+		String expected = "Wrong password";
+
+		System.out.println(actual);
+		Assert.assertEquals(actual, expected);
+		log.info("Login Unsuccessfull");
 	}
 
-	@And("Click on Add Event Category Button")
-	public void click_on_add_event_category_button() {
-	   event_page.clickonAddEventCategory_Btn();
-	}
+	@Then("Validations message is displayed for invalid username and valid password")
+	public void validations_message_is_displayed_for_invalid_username_and_valid_password() {
+		String actual = loginPg.get_validationText();
+		String expected = "Admin does not exist";
 
-	@And("Enter enter Event Name {string} and Status as {string}")
-	public void enter_enter_event_name_and_status_as(String EventName, String EventStatus) {
-	   create_event.enterEvent_Name(EventName);
-	   create_event.selectEvent_Status(EventStatus);
-	  
-	}
-
-	@And("Click on Save")
-	public void click_on_save() {
-		 create_event.clickon_Savebtn();
+		System.out.println(actual);
+		Assert.assertEquals(actual, expected);
+		log.info("Login Unsuccessfull");
 	}
 	
-	@Then("Page Header should be {string}")
-	public void page_header_should_be(String actual) {
-		
-		String expected= event_page.page_Header();
-	    Assert.assertEquals(expected, actual);
+	@Then("Validations message is displayed for invalid username and invalid password")
+	public void validations_message_is_displayed_for_invalid_username_and_invalid_password() {
+		String actual = loginPg.get_validationText();
+		String expected = "Admin does not exist";
+
+		System.out.println(actual);
+		Assert.assertEquals(actual, expected);
+		log.info("Login Unsuccessfull");
 	}
 
-	@Then("Header should be {string}")
-	public void header_should_be(String actual1) {
-		
-		String expected1 = create_event.Event_WidgetHeader();
-	   Assert.assertEquals(expected1, actual1);
+	@Then("Validations message is displayed for blank username and valid password")
+	public void validations_message_is_displayed_for_blank_username_and_valid_password() {
+		String actual = loginPg.get_validationText();
+		String expected = "Please fill all fields";
+
+		System.out.println(actual);
+		Assert.assertEquals(actual, expected);
+		log.info("Login Unsuccessfull");
+	}
+
+	@Then("Validations message is displayed for valid username and blank password")
+	public void validations_message_is_displayed_for_valid_username_and_blank_password() {
+		String actual = loginPg.get_validationText();
+		String expected = "Please fill all fields";
+
+		System.out.println(actual);
+		Assert.assertEquals(actual, expected);
+		log.info("Login Unsuccessfull");
+	}
+
+	@Then("Validations message is displayed for blank username and blank password")
+	public void validations_message_is_displayed_for_blank_username_and_blank_password() {
+		String actual = loginPg.get_validationText();
+		String expected = "Please fill all fields";
+
+		System.out.println(actual);
+		Assert.assertEquals(actual, expected);
+		log.info("Login Unsuccessfull");
 	}
 }
